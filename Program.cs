@@ -50,6 +50,7 @@ namespace Bibliothek
             Sprache = sprache;
             Erscheinungsjahr = jahr;
             //Der Standort ist abhängig vom Fachgebiet (wir schreiben eine Methode)
+            Standort = setStandort();
             Verfügbar = true;
         }
         /*Erstellen Sie die Methoden Ausleihen() und Zurückgeben().
@@ -79,6 +80,48 @@ namespace Bibliothek
             else
             {
                 Console.WriteLine("Fehler! " + Titel + " wurde nicht verliehen und kann deshalb nicht zurückgegeben werden. ");
+            }
+            
+        }
+        private string setStandort()
+        {
+            /*Wir schreiben die Methode Standort, die einem Buch automatisch
+             * (abhängig vom Fachgebiet) den Standort zuweist.
+             * Die Bücher werden verteilt:
+             * Standort        Themen/Fachgebiet
+             * Campus          Mathematik; Wirtschaft; Geschichte; Schulbücher; Biografien
+             * Medizin/NaWi    Medizin; Biologie; Chemie; Physik
+             * Albertina       Geistwissenschaften; Philosophie; Germanistik; Zeitungen; Archiv
+             * 
+             */
+            string[] campus = { "Mathematik", "Wirtschaft", "Geschichte", "Schulbuch", "Biografie", "Elektrotechnik" };
+            string[] medizin = { "Medizin", "Biologie", "Chemie", "Physik" };
+            string[] albertina = { "Philosophie", "Germanistik", "Archiv", "Zeitschrift" };
+            if(campus.Contains(Fachgebiet)) { return "Campus"; }
+            else if (medizin.Contains(Fachgebiet)) { return "Medizin"; }
+            else { return "Albertina"; }
+
+
+
+        }
+        private string setStandortSwitch()
+        {
+            switch (Fachgebiet)
+            {
+                case "Mathematik": return "Campus";
+                case "Wirtschaft": return "Campus";
+                case "Geschichte": return "Campus";
+                case "Schulbücher": return "Campus";
+                default: return "Albertina";
+                //Warum benötigt man break nicht?
+            }
+        }
+        private void setStandortVoid()
+        {
+            switch (Fachgebiet)
+            {
+                case "Mathematik": Standort = "Campus"; break;
+                default: Console.WriteLine("Fahler! Für das Fachgebiet " + " ist kein ")
             }
         }
     }
